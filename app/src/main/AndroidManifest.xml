@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hfad.barter">
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data android:name="android.app.default_searchable" android:value=".SearchableActivity"/>
+        <receiver
+            android:name=".NotificationPublisher"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.pycitup.BroadcastReceiver" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BootReceiver" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- enable the search dialog to send searches to SearchableActivity -->
+                <!--<meta-data android:name="android.app.default_searchable"
+                    android:value=".SearchableActivity" />-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TransactionActivity"
+            android:label="@string/title_activity_transaction"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hfad.barter.MainActivity" />
+        </activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".TransactionDetailActivity"
+            android:label="TransactionDetailActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hfad.barter.MainActivity" />
+        </activity>
+        <activity android:name=".SearchableActivity" android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+            </activity>
+    </application>
+
+</manifest>

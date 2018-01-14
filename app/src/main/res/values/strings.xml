@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Barter</string>
+    <string name="new_transaction">New Transaction</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_transaction">TransactionActivity</string>
+    <string name="action_share">Share</string>
+    <string name="title_top">Top fragment</string>
+    <string name="lent_fragment">Lent</string>
+    <string name="borrow_fragment">Borrowed</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="closed_drawer">Closed Drawer</string>
+    <string name="search_hint">Search Items</string>
+    <string-array name="lb_spinner">
+        <item>Lend</item>
+        <item>Borrow</item>
+    </string-array>
+    <string-array name="lent_items">
+        <item>lent</item>
+        <item>test</item>
+    </string-array>
+
+    <string-array name="borrowed_items">
+        <item>borrowed</item>
+        <item>test</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>home</item>
+        <item>lent</item>
+        <item>Borrowed</item>
+    </string-array>
+
+</resources>
