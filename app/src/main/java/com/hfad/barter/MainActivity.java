@@ -268,6 +268,5 @@ public class MainActivity extends Activity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    //HANDLING CARD BUTTON CLICKS
 
 }

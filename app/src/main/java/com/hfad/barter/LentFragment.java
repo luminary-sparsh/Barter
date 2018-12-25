@@ -39,11 +39,9 @@ public class LentFragment extends Fragment {
                     cursor.getString(3),cursor.getString(4), cursor.getString(5),cursor.getString(6));
                         list.add(transactions);
         }while (cursor !=null && cursor.moveToNext());
-
         //set the recycler view adapter
         adapter= new RecyclerViewAdapter(list);
         recyclerView.setAdapter(adapter);
         return recyclerView;
     }
-
 }
