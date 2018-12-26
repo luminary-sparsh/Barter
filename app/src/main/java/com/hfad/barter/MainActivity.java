@@ -1,18 +1,22 @@
 package com.hfad.barter;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,12 +28,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.ShareActionProvider;
+
+import java.lang.reflect.Method;
 
 import static android.content.ContentValues.TAG;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     ShareActionProvider shareActionProvider;
     private String titles[];
@@ -43,11 +48,18 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*String themeName = getThemeName();
+        setTheme(android.R.style.Theme);
+        Log.d(TAG, "onCreate: "+ themeName);*/
         setContentView(R.layout.activity_main);
         titles = getResources().getStringArray(R.array.titles);
-        drawerList = (ListView) findViewById(R.id.drawer_list);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
+        try {
+            drawerList = (ListView) findViewById(R.id.drawer_list);
+            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
         //create actionbartoggle
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,
@@ -64,8 +76,8 @@ public class MainActivity extends Activity {
             }
         };
         drawerLayout.addDrawerListener(drawerToggle);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         //Display the correct fragment
         if(savedInstanceState!=null){
             currentPosition = savedInstanceState.getInt("position");
@@ -103,7 +115,7 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         final MenuItem searchitem = menu.findItem(R.id.search_icon);
         final MenuItem menuItem = menu.findItem(R.id.action_share);
-        shareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
         setIntent("This is an example text");
 
         // Get the SearchView and set the searchable configuration
@@ -256,7 +268,7 @@ public class MainActivity extends Activity {
         } else {
             title = titles[position];
         }
-        getActionBar().setTitle(title);
+        getSupportActionBar().setTitle(title);
     }
 
     //called whenever invalidateOptionsMenu() is called
@@ -268,5 +280,32 @@ public class MainActivity extends Activity {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    //todo: remove after testing
+    int getThemeId() {
+        try {
+            Class<?> wrapper = Context.class;
+            Method method = wrapper.getMethod("getThemeResId");
+            method.setAccessible(true);
+            return (Integer) method.invoke(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
+    //todo: remove after testing
+    public String getThemeName()
+    {
+        PackageInfo packageInfo;
+        try
+        {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+            int themeResId = packageInfo.applicationInfo.theme;
+            return getResources().getResourceEntryName(themeResId);
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            return null;
+        }
+    }
 }

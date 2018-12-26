@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +33,7 @@ import static android.content.ContentValues.TAG;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 
-public class TransactionActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class TransactionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner spinner;
     private EditText lentBorrow;
@@ -48,8 +49,8 @@ public class TransactionActivity extends Activity implements AdapterView.OnItemS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
-        getActionBar().setTitle("New Transaction");     //setting initial title of the actionbar
-        getActionBar().setDisplayHomeAsUpEnabled(true);   ////setting back(home) button on the top left corner
+        getSupportActionBar().setTitle("New Transaction");     //setting initial title of the actionbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   ////setting back(home) button on the top left corner
         spinner = (Spinner) findViewById(R.id.lb_spinner);
         lentBorrow = (EditText) findViewById(R.id.lb_name);
         lb = getResources().getStringArray(R.array.lb_spinner);
