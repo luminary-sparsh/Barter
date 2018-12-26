@@ -19,37 +19,44 @@
         tools:context="com.hfad.barter.TransactionActivity">
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/lb_spinner"
             android:id="@+id/lb_spinner"
-            android:layout_margin="5dp"></Spinner>
+            android:layout_margin="8dp"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/item_name"
-            android:layout_margin="5dp"
+            android:padding="8dp"
+            android:background="@drawable/background"
+            android:layout_margin="8dp"
+
             android:hint="Enter item name"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lb_name"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:background="@drawable/background"
             android:hint="Enter the borrower's name"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:id="@+id/item_description"
+            android:background="@drawable/background"
             android:hint="Enter Description of the Item"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -74,14 +81,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/submit_button"
             android:onClick="submit"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
+            style="@style/ButtonStyle"
             android:text="SUBMIT"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/show_db"
+            android:layout_margin="8dp"
             android:text="showDB"
-            android:onClick="showDB"/>
+            android:onClick="showDB"
+            style="@style/ButtonStyle"/>
     </LinearLayout>
 </ScrollView>

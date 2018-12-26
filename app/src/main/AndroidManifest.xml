@@ -23,6 +23,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +36,7 @@
         <activity
             android:name=".TransactionActivity"
             android:label="@string/title_activity_transaction"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,12 +53,15 @@
         <activity
             android:name=".TransactionDetailActivity"
             android:label="TransactionDetailActivity"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hfad.barter.MainActivity" />
         </activity>
-        <activity android:name=".SearchableActivity" android:launchMode="singleTop" >
+        <activity android:name=".SearchableActivity"
+            android:theme="@style/AppTheme"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
