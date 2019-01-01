@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -94,16 +95,16 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
         if(currentPosition==1){            cardlorb.setText("Borrower's Name: ");
         }else cardlorb.setText("Lender's Name: ");
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        /*holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,TransactionDetailActivity.class);
                 intent.putExtra("ID",id.toString());
                 context.startActivity(intent);
             }
-        });
+        });*/
 
-        Button delete = (Button) holder.cardView.findViewById(R.id.card_delete_button);
+        ImageButton delete = (ImageButton) holder.cardView.findViewById(R.id.card_delete_button);
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -122,7 +123,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
             }
         });
 
-        Button favorite = (Button) holder.cardView.findViewById(R.id.card_favorite_button);
+        ImageButton favorite = (ImageButton) holder.cardView.findViewById(R.id.card_favorite_button);
         favorite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -135,7 +136,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
             }
         });
 
-        Button remind = (Button) holder.cardView.findViewById(R.id.card_reminder_button);
+        ImageButton remind = (ImageButton) holder.cardView.findViewById(R.id.card_reminder_button);
         remind.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

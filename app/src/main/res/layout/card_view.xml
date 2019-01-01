@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/card_view"
-    android:layout_margin="5dp"
-    card_view:cardCornerRadius="0dp">
+    android:layout_margin="4dp"
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,32 +105,47 @@
                 android:layout_margin="2dp"/>
             </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/separator"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Fav"
+                android:src="@drawable/ic_baseline_favorite_border_24px"
                 android:onClick="onFavoriteClick"
+                android:layout_gravity="center"
+                android:background="@color/colorTransparent"
                 android:id="@+id/card_favorite_button"/>
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Remind"
+                android:background="@color/colorTransparent"
+                android:src="@drawable/ic_baseline_timer_24px"
+                android:layout_gravity="center"
                 android:onClick="onReminderClick"
                 android:id="@+id/card_reminder_button"/>
 
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Delete"
                 android:onClick="onDeleteClick"
+                android:src="@drawable/ic_baseline_delete_24px"
+                android:background="@color/colorTransparent"
                 android:id="@+id/card_delete_button"/>
         </LinearLayout>
         

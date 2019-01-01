@@ -6,7 +6,7 @@
         android:id="@+id/add_new_Transaction"
         android:orderInCategory="1"
         android:title="@string/new_transaction"
-        android:icon="@drawable/ic_add_black_24dp"
+        android:icon="@drawable/ic_baseline_add_24px"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_share"
@@ -26,6 +26,6 @@
         android:hint="@string/search_hint"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="collapseActionView|always"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_baseline_search_24px"
         android:iconifiedByDefault="false" />
 </menu>

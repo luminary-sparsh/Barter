@@ -53,13 +53,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: "+ themeName);*/
         setContentView(R.layout.activity_main);
         titles = getResources().getStringArray(R.array.titles);
-        try {
-            drawerList = (ListView) findViewById(R.id.drawer_list);
-            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        drawerList = (ListView) findViewById(R.id.drawer_list);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
         //create actionbartoggle
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,
@@ -76,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         drawerLayout.addDrawerListener(drawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        } catch (Exception e) {
+            Log.d(TAG, "onCreate: "+e.getMessage());
+        }
         //Display the correct fragment
         if(savedInstanceState!=null){
             currentPosition = savedInstanceState.getInt("position");

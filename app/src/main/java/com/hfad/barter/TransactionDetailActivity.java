@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
 import static android.os.Build.ID;
 
-public class TransactionDetailActivity extends Activity {
+public class TransactionDetailActivity extends AppCompatActivity {
 
     private SQLiteDatabase db;
     private RecyclerViewAdapter adapter;
@@ -27,9 +28,9 @@ public class TransactionDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_detail);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setTitle("Transaction Detail");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Transaction Detail");
         //getting value of id
         String id = getIntent().getStringExtra("ID").toString();
         Log.d(TAG, "onCreate: value of Id from Intent" + id);
