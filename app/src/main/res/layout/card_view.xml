@@ -1,12 +1,11 @@
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/card_view"
     android:layout_margin="4dp"
-    card_view:cardElevation="2dp"
-    card_view:cardCornerRadius="8dp">
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,100 +16,121 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Item Name: "
-                android:textSize="16sp"
-                android:layout_margin="2dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/card_item_name"
-                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="2dp"
-                android:textColor="#000000"/>
+                android:layout_weight="0.35"
+                android:gravity="center_vertical"
+                android:text="Item Name: "
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/card_item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="0.65"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/card_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:id="@+id/card_id"/>
+                android:visibility="gone" />
 
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:id="@+id/lorb"
-                android:layout_margin="2dp"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="2dp"
+                android:layout_weight="0.35"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:id="@+id/card_lb_name"
-                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="0.65"
                 android:textColor="#000000"
-                android:layout_margin="2dp"/>
-            
+                android:textSize="16sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Item Description: "
-                android:textSize="16sp"
-                android:layout_margin="2dp"/>
+                android:layout_gravity="center_vertical"
+                android:layout_margin="2dp"
+                android:layout_weight=".35"
+                android:gravity="center_vertical"
+                android:text="Description: "
+                android:textSize="14sp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:id="@+id/card_description"
-                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="0.65"
                 android:textColor="#000000"
-                android:layout_margin="2dp"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="2dp"
+                android:layout_weight="0.35"
+                android:gravity="center_vertical"
                 android:text="Date and Time: "
-                android:layout_margin="2dp"/>
+                android:textSize="14sp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:id="@+id/card_date_time"
-                android:textColor="#000000"
-                android:layout_margin="2dp"/>
-            </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="0.65"
+                android:textSize="16sp"
+                android:textColor="#000000" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:background="@color/separator"/>
+            android:layout_marginTop="2dp"
+            android:background="@color/separator" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,36 +139,37 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/card_favorite_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/ic_baseline_favorite_border_24px"
+                android:background="@color/colorTransparent"
                 android:onClick="onFavoriteClick"
-                android:layout_gravity="center"
-                android:background="@color/colorTransparent"
-                android:id="@+id/card_favorite_button"/>
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Remind"
-                android:background="@color/colorTransparent"
-                android:src="@drawable/ic_baseline_timer_24px"
-                android:layout_gravity="center"
-                android:onClick="onReminderClick"
-                android:id="@+id/card_reminder_button"/>
+                android:src="@drawable/ic_baseline_favorite_border_24px" />
 
             <ImageButton
+                android:id="@+id/card_reminder_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:onClick="onReminderClick"
+                android:src="@drawable/ic_baseline_timer_24px"
+                android:text="Remind" />
+
+            <ImageButton
+                android:id="@+id/card_delete_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete"
+                android:background="@color/colorTransparent"
                 android:onClick="onDeleteClick"
                 android:src="@drawable/ic_baseline_delete_24px"
-                android:background="@color/colorTransparent"
-                android:id="@+id/card_delete_button"/>
+                android:text="Delete" />
         </LinearLayout>
-        
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

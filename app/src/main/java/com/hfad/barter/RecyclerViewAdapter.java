@@ -86,14 +86,14 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
         carddescription.setText(transactions.getDescription());
 
         TextView carddatetime = (TextView) holder.cardView.findViewById(R.id.card_date_time);
-        carddatetime.setText(transactions.getDatetime());
+        carddatetime.setText(transactions.getDatetime().trim());
 
         final TextView id=(TextView) holder.cardView.findViewById(R.id.card_id);
         id.setText(transactions.getID());
 
         TextView cardlorb = (TextView) holder.cardView.findViewById(R.id.lorb);
-        if(currentPosition==1){            cardlorb.setText("Borrower's Name: ");
-        }else cardlorb.setText("Lender's Name: ");
+        if(currentPosition==1){            cardlorb.setText("Borrower");
+        }else cardlorb.setText("Lender:");
 
         /*holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
