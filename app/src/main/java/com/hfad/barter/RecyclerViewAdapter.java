@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -162,6 +163,10 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                 }, m_year, m_month, m_day);
 
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        ConstraintLayout constraintLayout=(ConstraintLayout) View.inflate(context,R.layout.picker_dialog_title_layout,null);
+        TextView title = (TextView)constraintLayout.findViewById(R.id.picker_dialog_header);
+        title.setText("Reminder");
+        datePickerDialog.setCustomTitle(constraintLayout);
         datePickerDialog.show();
 
     }
@@ -186,6 +191,11 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                     }
 
                 }, m_hour, m_min, false);
+        /*timePickerDialog.setTitle("Reminder time");*/
+        ConstraintLayout constraintLayout=(ConstraintLayout) View.inflate(context,R.layout.picker_dialog_title_layout,null);
+        TextView title = (TextView)constraintLayout.findViewById(R.id.picker_dialog_header);
+        title.setText("Reminder");
+        timePickerDialog.setCustomTitle(constraintLayout);
         timePickerDialog.show();
     }
 

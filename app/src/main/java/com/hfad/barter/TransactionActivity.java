@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -127,6 +128,10 @@ public class TransactionActivity extends AppCompatActivity implements AdapterVie
                     }
                 }, m_year, m_month, m_day);
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        ConstraintLayout constraintLayout=(ConstraintLayout) View.inflate(this,R.layout.picker_dialog_title_layout,null);
+        TextView title = (TextView)constraintLayout.findViewById(R.id.picker_dialog_header);
+        title.setText("Transaction Date");
+        datePickerDialog.setCustomTitle(constraintLayout);
         datePickerDialog.show();
     }
 
@@ -144,6 +149,10 @@ public class TransactionActivity extends AppCompatActivity implements AdapterVie
                         date_time.setText("  "+dateTime + "   " + hourOfDay + ":" + minute);
                     }
                 }, m_hour, m_min, false);
+        ConstraintLayout constraintLayout=(ConstraintLayout) View.inflate(this,R.layout.picker_dialog_title_layout,null);
+        TextView title = (TextView)constraintLayout.findViewById(R.id.picker_dialog_header);
+        title.setText("Transaction Time");
+        timePickerDialog.setCustomTitle(constraintLayout);
         timePickerDialog.show();
     }
 
