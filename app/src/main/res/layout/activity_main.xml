@@ -19,6 +19,7 @@
         android:divider="@android:color/transparent"
         android:choiceMode="singleChoice"
         android:layout_gravity="start"
+        android:listSelector="@color/colorPrimary"
         android:background="#ffffff">
     </ListView>
 

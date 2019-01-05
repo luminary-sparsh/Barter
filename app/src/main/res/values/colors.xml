@@ -8,4 +8,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTransparent">#00dddddd</color>
     <color name="separator">#d6d6d6</color>
+    <color name="white">#ffffff</color>
 </resources>

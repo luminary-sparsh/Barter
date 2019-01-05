@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -48,15 +49,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*String themeName = getThemeName();
-        setTheme(android.R.style.Theme);
-        Log.d(TAG, "onCreate: "+ themeName);*/
         setContentView(R.layout.activity_main);
         titles = getResources().getStringArray(R.array.titles);
         drawerList = (ListView) findViewById(R.id.drawer_list);
+        drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
+        final DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, android.R.layout.simple_list_item_1, titles,currentPosition);
+        drawerList.setAdapter(drawerListAdapter);
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+
         //create actionbartoggle
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,
                 R.string.open_drawer,R.string.closed_drawer){
@@ -71,17 +73,18 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         };
+
         drawerLayout.addDrawerListener(drawerToggle);
-        try {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-        } catch (Exception e) {
-            Log.d(TAG, "onCreate: "+e.getMessage());
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
         //Display the correct fragment
         if(savedInstanceState!=null){
             currentPosition = savedInstanceState.getInt("position");
             setActionBarTitle(currentPosition);
+            drawerList.setItemChecked(currentPosition,true);
+            drawerListAdapter.setSelectedPosition(currentPosition);
         }else{
             selectItem(0);
         }
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         setActionBarTitle(currentPosition);
                         drawerList.setItemChecked(currentPosition,true);
+                        drawerListAdapter.setSelectedPosition(currentPosition);
                     }
                 }
         );
