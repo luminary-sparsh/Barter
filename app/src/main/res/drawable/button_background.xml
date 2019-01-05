@@ -4,14 +4,16 @@
     <corners
         android:radius="10dp" />
 
-    <gradient
+    <solid android:color="@color/colorPrimary"/>
+
+    <!--<gradient
         android:angle="45"
         android:centerX="32"
         android:centerY="32"
         android:endColor="#01f1fa"
-        android:gradientRadius="50dp"
-        android:startColor="#0189ff"
-        android:type="linear" />
+        android:gradientRadius="5dp"
+        android:startColor="@color/colorPrimary"
+        android:type="linear" />-->
 
     <!--If your shape requires only one solid color-->
     <!--<solid

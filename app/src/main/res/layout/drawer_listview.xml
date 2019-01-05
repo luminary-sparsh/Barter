@@ -5,7 +5,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/tv_title"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_margin="12dp"
         android:textColor="@drawable/listview_item_states"
         android:layout_height="wrap_content" />

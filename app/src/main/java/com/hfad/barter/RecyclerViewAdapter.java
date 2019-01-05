@@ -149,7 +149,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
     }
 
     private void getDateTime(final String id, final String nameofitem, final String itemDescription){
-        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context,R.style.DialogTheme,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -167,7 +167,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
     }
 
     private void timePicker(final String id, final String nameofitem,final String itemdescription){
-        TimePickerDialog timePickerDialog = new TimePickerDialog(context,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(context,R.style.DialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

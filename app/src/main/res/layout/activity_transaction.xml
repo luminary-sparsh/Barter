@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp"
     android:fillViewport="false">
@@ -18,18 +19,35 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.hfad.barter.TransactionActivity">
 
-        <Spinner
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/lb_spinner"
-            android:id="@+id/lb_spinner"
-            android:layout_margin="8dp"/>
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/background"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Type:"
+                android:textSize="16sp"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/lb_spinner"
+                android:id="@+id/lb_spinner"
+                />
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/item_name"
             android:padding="8dp"
+            android:textSize="16sp"
             android:background="@drawable/background"
             android:layout_margin="8dp"
 
@@ -41,6 +59,7 @@
             android:id="@+id/lb_name"
             android:layout_margin="8dp"
             android:padding="8dp"
+            android:textSize="16sp"
             android:background="@drawable/background"
             android:hint="Enter the borrower's name"/>
 
@@ -49,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:padding="8dp"
+            android:textSize="16sp"
             android:id="@+id/item_description"
             android:background="@drawable/background"
             android:hint="Enter Description of the Item"/>
@@ -57,20 +77,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:padding="8dp"
+            android:background="@drawable/background"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date: "
-                android:textSize= "18sp"
+                android:textSize= "16sp"
+                android:layout_marginRight="8dp"
                 android:textColor="@android:color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/date_time_picker"
-                android:textSize= "18sp"
+                android:textSize= "16sp"
                 android:onClick="dateTimePicker"
                 android:textColor="@android:color/black"/>
 
@@ -93,5 +116,7 @@
             android:text="showDB"
             android:onClick="showDB"
             style="@style/ButtonStyle"/>
+
     </LinearLayout>
+    
 </ScrollView>

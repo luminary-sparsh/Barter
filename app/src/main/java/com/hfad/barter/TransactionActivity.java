@@ -117,7 +117,7 @@ public class TransactionActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void dateTimePicker(View v) {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,R.style.DialogTheme,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -131,7 +131,7 @@ public class TransactionActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void timePicker() {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,R.style.DialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
 
                     @Override

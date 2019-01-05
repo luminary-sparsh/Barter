@@ -52,12 +52,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         titles = getResources().getStringArray(R.array.titles);
         drawerList = (ListView) findViewById(R.id.drawer_list);
-        drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);  //only one item can be selected at one time
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, android.R.layout.simple_list_item_1, titles,currentPosition);
         drawerList.setAdapter(drawerListAdapter);
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
-
 
         //create actionbartoggle
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,
@@ -83,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState!=null){
             currentPosition = savedInstanceState.getInt("position");
             setActionBarTitle(currentPosition);
+            //setting item checked(for text color change of selected item) and setSelectedItem(for background color change of selected item)
             drawerList.setItemChecked(currentPosition,true);
             drawerListAdapter.setSelectedPosition(currentPosition);
         }else{
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             currentPosition = 2;
                         }
                         setActionBarTitle(currentPosition);
+                        //setting item checked(for text color change of selected item) and setSelectedItem(for background color change of selected item)
                         drawerList.setItemChecked(currentPosition,true);
                         drawerListAdapter.setSelectedPosition(currentPosition);
                     }
