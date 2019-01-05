@@ -29,6 +29,7 @@ import java.util.Calendar;
 
 import static android.R.attr.description;
 import static android.R.attr.id;
+import static android.R.attr.itemBackground;
 import static android.R.attr.name;
 import static android.content.ContentValues.TAG;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
@@ -115,6 +116,8 @@ public class TransactionActivity extends AppCompatActivity implements AdapterVie
                     Toast.LENGTH_SHORT);
             toast.show();
         }
+        //going back to previous page after submit
+        this.onBackPressed();
     }
 
     public void dateTimePicker(View v) {
