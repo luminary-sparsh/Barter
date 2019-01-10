@@ -30,4 +30,6 @@
         <item>Borrowed</item>
     </string-array>
 
+    <string name="delete">Delete</string>
+
 </resources>

@@ -9,11 +9,14 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -109,18 +112,35 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                TextView id=(TextView) holder.cardView.findViewById(R.id.card_id);
-                String _id=id.getText().toString();
-                BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(context);
-                SQLiteDatabase db = barterDatabaseHelper.getWritableDatabase();
-                db.delete("TRANSACTIONS","_id = "+_id,null);
-                try {
-                    list.remove(position);
-                    notifyItemRemoved(position);
-                    //this line below gives you the animation and also updates the
-                    //list items after the deleted item
-                    notifyItemRangeChanged(position, getItemCount());
-                } catch (Exception e) {      e.printStackTrace();  }
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(context,R.style.AlertDialogTheme);
+                builder.setTitle("Delete entry")
+                        .setMessage("Are you sure you want to delete this entry?")
+                        .setPositiveButton(context.getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                                TextView id=(TextView) holder.cardView.findViewById(R.id.card_id);
+                                String _id=id.getText().toString();
+                                BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(context);
+                                SQLiteDatabase db = barterDatabaseHelper.getWritableDatabase();
+                                db.delete("TRANSACTIONS","_id = "+_id,null);
+                                try {
+                                    list.remove(position);
+                                    notifyItemRemoved(position);
+                                    //this line below gives you the animation and also updates the
+                                    //list items after the deleted item
+                                    notifyItemRangeChanged(position, getItemCount());
+                                } catch (Exception e) {      e.printStackTrace();  }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // dismiss dialog
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(R.drawable.ic_baseline_delete_18px)
+                        .show();
             }
         });
 

@@ -20,4 +20,17 @@
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
+
+    <style name="AlertDialogTheme" parent="AlertDialog.AppCompat.Light">
+        <item name="android:windowIsFloating">true</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Base.Widget.AppCompat.Button.Borderless.PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Base.Widget.AppCompat.Button.Borderless.NegativeButtonStyle</item>
+    </style>
+    
+    <style name="Base.Widget.AppCompat.Button.Borderless.PositiveButtonStyle">
+        <item name="android:textColor">@color/red_delete</item>
+    </style>
+    <style name="Base.Widget.AppCompat.Button.Borderless.NegativeButtonStyle">
+        <item name="android:textColor">@color/black_text</item>
+    </style>
 </resources>
