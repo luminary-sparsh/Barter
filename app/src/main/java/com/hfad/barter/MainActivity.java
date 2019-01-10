@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         drawerList.setAdapter(drawerListAdapter);
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
+
         //create actionbartoggle
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,
                 R.string.open_drawer,R.string.closed_drawer){
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState!=null){
             currentPosition = savedInstanceState.getInt("position");
             setActionBarTitle(currentPosition);
-            //setting item checked(for text color change of selected item) and setSelectedItem(for background color change of selected item)
             drawerList.setItemChecked(currentPosition,true);
             drawerListAdapter.setSelectedPosition(currentPosition);
         }else{
@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                             currentPosition = 2;
                         }
                         setActionBarTitle(currentPosition);
-                        //setting item checked(for text color change of selected item) and setSelectedItem(for background color change of selected item)
                         drawerList.setItemChecked(currentPosition,true);
                         drawerListAdapter.setSelectedPosition(currentPosition);
                     }
@@ -285,32 +284,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    //todo: remove after testing
-    int getThemeId() {
-        try {
-            Class<?> wrapper = Context.class;
-            Method method = wrapper.getMethod("getThemeResId");
-            method.setAccessible(true);
-            return (Integer) method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    //todo: remove after testing
-    public String getThemeName()
-    {
-        PackageInfo packageInfo;
-        try
-        {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
-            int themeResId = packageInfo.applicationInfo.theme;
-            return getResources().getResourceEntryName(themeResId);
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
-            return null;
-        }
-    }
 }

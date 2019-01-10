@@ -9,4 +9,6 @@
     <color name="colorTransparent">#00dddddd</color>
     <color name="separator">#d6d6d6</color>
     <color name="white">#ffffff</color>
+    <color name="black_text">#000000</color>
+    <color name="background_gray">#56b6b5b5</color>
 </resources>
