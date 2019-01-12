@@ -39,6 +39,18 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
     private int currentPosition;
     Context context;
     private int m_day,m_month,m_year,m_hour,m_min;
+    private ImageButton favorite;
+    private TextView carditemname;
+    private TextView cardlbname;
+    private TextView carddescription;
+    private TextView carddatetime;
+    private TextView id;
+    private TextView cardlorb;
+    private ImageButton delete;
+    private ImageButton remind;
+    private Boolean isFav;
+    private String TAG = "RecyclerViewAdpater";
+    Transactions transactions;
 
 
     public RecyclerViewAdapter(ArrayList<Transactions> list) {
@@ -81,29 +93,41 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
         return new ViewHolder(cv);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position){
         final int pos = position;
-        final Transactions transactions = list.get(position);
+        transactions = list.get(position);
+        isFav = transactions.getFavorite().trim().equals("1");
+        favorite = (ImageButton) holder.cardView.findViewById(R.id.card_favorite_button);
+        carditemname = (TextView) holder.cardView.findViewById(R.id.card_item_name);
+        cardlbname = (TextView) holder.cardView.findViewById(R.id.card_lb_name);
+        carddescription = (TextView) holder.cardView.findViewById(R.id.card_description);
+        carddatetime = (TextView) holder.cardView.findViewById(R.id.card_date_time);
+        id=(TextView) holder.cardView.findViewById(R.id.card_id);
+        cardlorb = (TextView) holder.cardView.findViewById(R.id.lorb);
+        delete = (ImageButton) holder.cardView.findViewById(R.id.card_delete_button);
+        remind = (ImageButton) holder.cardView.findViewById(R.id.card_reminder_button);
 
-        TextView carditemname = (TextView) holder.cardView.findViewById(R.id.card_item_name);
         carditemname.setText(transactions.getItemname());
-
-        TextView cardlbname = (TextView) holder.cardView.findViewById(R.id.card_lb_name);
         cardlbname.setText(transactions.getLBname());
-
-        TextView carddescription = (TextView) holder.cardView.findViewById(R.id.card_description);
         carddescription.setText(transactions.getDescription());
-
-        TextView carddatetime = (TextView) holder.cardView.findViewById(R.id.card_date_time);
         carddatetime.setText(transactions.getDatetime().trim());
-
-        final TextView id=(TextView) holder.cardView.findViewById(R.id.card_id);
         id.setText(transactions.getID());
 
-        TextView cardlorb = (TextView) holder.cardView.findViewById(R.id.lorb);
+        //if favorite then filled heart else bordered heart
+        if (isFav){
+            favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_favorite_filled_24px));
+        }
+        if (!isFav){
+            favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24px));
+        }
+
+        //Todo: investigate the following code
+
         if(currentPosition==1){            cardlorb.setText("Borrower");
         }else cardlorb.setText("Lender:");
+
 
         /*holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +138,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
             }
         });*/
 
-        ImageButton delete = (ImageButton) holder.cardView.findViewById(R.id.card_delete_button);
+
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -150,7 +174,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
             }
         });
 
-        ImageButton favorite = (ImageButton) holder.cardView.findViewById(R.id.card_favorite_button);
+
         favorite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -158,12 +182,29 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                 String _id=id.getText().toString();
                 BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(context);
                 SQLiteDatabase db = barterDatabaseHelper.getWritableDatabase();
-                String strSQL = "UPDATE TRANSACTIONS SET FAVORITE = 1 WHERE _id = "+ _id;
-                db.execSQL(strSQL);
+                if (isFav){
+                    String strSQL = "UPDATE TRANSACTIONS SET FAVORITE = 0 WHERE _id = "+ _id;
+                    db.execSQL(strSQL);
+                    Log.d(TAG, "what position are we in "+position);
+                    ImageButton fav = (ImageButton)v;
+                    fav.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24px ));
+                    list.get(position).setFavorite("0");
+                    isFav=false;
+
+                }
+                else {
+                    String strSQL = "UPDATE TRANSACTIONS SET FAVORITE = 1 WHERE _id = "+ _id;
+                    db.execSQL(strSQL);
+                    ImageButton fav = (ImageButton)v;
+                    fav.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_favorite_filled_24px ));
+                    transactions.setFavorite("1");
+                    list.get(position).setFavorite("1");
+                    isFav=true;
+                }
             }
         });
 
-        ImageButton remind = (ImageButton) holder.cardView.findViewById(R.id.card_reminder_button);
+
         remind.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

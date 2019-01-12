@@ -10,7 +10,7 @@
         android:gravity="center_horizontal"
         android:padding="8dp"
         android:layout_marginBottom="-2dp"
-        android:text="Borrowed Stuff"
+        android:text="Stuff Borrowed"
         android:textColor="@color/black_text"
         android:background="@color/background_gray"
         android:textSize="16sp"

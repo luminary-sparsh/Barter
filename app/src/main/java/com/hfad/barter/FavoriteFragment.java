@@ -26,7 +26,7 @@ public class FavoriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the recycler layout and set linear layout to it.
-        View theView = inflater.inflate(R.layout.fragment_top, null);
+        View theView = inflater.inflate(R.layout.fragment_favorite, null);
         RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.top_recycler);
         /*RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_lent,container,false);
         LinearLayoutManager llm= new LinearLayoutManager(getActivity());
