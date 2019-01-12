@@ -63,11 +63,17 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
             FragmentManager fragmentManager=activity.getFragmentManager();
             Fragment fragment = fragmentManager.findFragmentByTag("visible_fragment");
 
+            if (fragment instanceof TopFragment){
+                currentPosition =  0;
+            }
             if (fragment instanceof LentFragment){
                 currentPosition = 1;
             }
             if (fragment instanceof BorrowFragment){
                 currentPosition = 2;
+            }
+            if (fragment instanceof FavoriteFragment){
+                currentPosition = 3;
             }
         } catch (ClassCastException e) {
             Log.d(TAG, "Can't get the fragment manager with this");

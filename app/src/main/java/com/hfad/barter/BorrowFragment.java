@@ -23,9 +23,11 @@ public class BorrowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the recycler layout and set linear layout to it.
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_lent,container,false);
+        /*RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_borrow,container,false);
         LinearLayoutManager llm= new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(llm);
+        recyclerView.setLayoutManager(llm);*/
+        View theView = inflater.inflate(R.layout.fragment_borrow, null);
+        RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.borrow_recycler);
 
 
         //get database and information from it and store it in array list
@@ -47,7 +49,8 @@ public class BorrowFragment extends Fragment {
 
         //set the recycler view adapter
         adapter= new RecyclerViewAdapter(list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-        return recyclerView;
+        return theView;
     }
 }

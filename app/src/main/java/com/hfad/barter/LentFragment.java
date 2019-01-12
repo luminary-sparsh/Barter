@@ -24,9 +24,11 @@ public class LentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the recycler layout and set linear layout to it.
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_lent,container,false);
+        /*RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_lent,container,false);
         LinearLayoutManager llm= new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(llm);
+        recyclerView.setLayoutManager(llm);*/
+        View theView = inflater.inflate(R.layout.fragment_lent, null);
+        RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.lent_recycler);
 
 
         //get database and information from it and store it in array list
@@ -41,7 +43,8 @@ public class LentFragment extends Fragment {
         }while (cursor !=null && cursor.moveToNext());
         //set the recycler view adapter
         adapter= new RecyclerViewAdapter(list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-        return recyclerView;
+        return theView;
     }
 }
