@@ -123,10 +123,15 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
             favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24px));
         }
 
-        //Todo: investigate the following code
+        //lender / borrower textview setting on the card
+        if (transactions.getLend().trim().equals("1")){
+            cardlorb.setText("Lender");
+        }else {
+            cardlorb.setText("Borrower");
+        }
 
-        if(currentPosition==1){            cardlorb.setText("Borrower");
-        }else cardlorb.setText("Lender:");
+        /*if(currentPosition==1){            cardlorb.setText("Borrower");
+        }else cardlorb.setText("Lender:");*/
 
 
         /*holder.cardView.setOnClickListener(new View.OnClickListener() {
