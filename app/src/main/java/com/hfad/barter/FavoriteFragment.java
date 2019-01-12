@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
 
-public class TopFragment extends Fragment {
+public class FavoriteFragment extends Fragment {
 
     private SQLiteDatabase db;
     RecyclerView.Adapter adapter;
@@ -36,7 +36,7 @@ public class TopFragment extends Fragment {
         //get database and information from it and store it in array list
         BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(getActivity());
         db = barterDatabaseHelper.getWritableDatabase();
-        Cursor cursor = barterDatabaseHelper.getInformation(db,3);
+        Cursor cursor = barterDatabaseHelper.getInformation(db,0);
         if(cursor !=null && cursor.moveToFirst())
             do{
                 Transactions transactions = new Transactions(cursor.getString(0),cursor.getString(1),cursor.getString(2),

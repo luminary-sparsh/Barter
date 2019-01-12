@@ -71,7 +71,10 @@ class BarterDatabaseHelper extends SQLiteOpenHelper {
         cursor = db.query("TRANSACTIONS",projection,"LEND=?",new String[]{"0"},null,null,null);
         } else if (frag == 2){
             cursor = db.query("TRANSACTIONS",projection,"LEND=?",new String[]{"1"},null,null,null);
-        } else {
+        }else if (frag == 3){
+            cursor = db.query("TRANSACTIONS", projection, null, null, null,null ,null );
+        }
+        else {
             cursor = db.query("TRANSACTIONS",projection,"FAVORITE=?",new String[]{"1"},null,null,null);
         }
         return cursor;

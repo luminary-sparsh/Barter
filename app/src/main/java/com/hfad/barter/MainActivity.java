@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
                         if (fragment instanceof BorrowFragment){
                             currentPosition = 2;
                         }
+                        if(fragment instanceof FavoriteFragment){
+                            currentPosition = 3;
+                        }
                         setActionBarTitle(currentPosition);
                         drawerList.setItemChecked(currentPosition,true);
                         drawerListAdapter.setSelectedPosition(currentPosition);
@@ -245,6 +248,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 fragment = new BorrowFragment();
+                break;
+            case 3:
+                fragment = new FavoriteFragment();
                 break;
             default:
                 fragment = new TopFragment();
