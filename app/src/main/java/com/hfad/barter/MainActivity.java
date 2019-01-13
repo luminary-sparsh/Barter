@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     public int currentPosition = 0;
     private ActionBarDrawerToggle drawerToggle;
-    SearchView searchView;
+    private SearchView searchView;
+    public static final int OPEN_NEW_ACTIVITY = 123456;
 
 
     @Override
@@ -193,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (drawerToggle.onOptionsItemSelected(menuItem)){
@@ -203,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.add_new_Transaction:
                 Intent intent = new Intent(this, TransactionActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 return true;
             case R.id.search_icon:
                 return true;
@@ -290,4 +293,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        FragmentManager fragMan = getFragmentManager();
+        Fragment fragment = fragMan.findFragmentByTag("visible_fragment");
+        fragment.onActivityResult(requestCode, resultCode, data);
+
+    }
 }

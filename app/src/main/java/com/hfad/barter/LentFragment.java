@@ -2,6 +2,7 @@ package com.hfad.barter;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -30,21 +31,33 @@ public class LentFragment extends Fragment {
         View theView = inflater.inflate(R.layout.fragment_lent, null);
         RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.lent_recycler);
 
-
         //get database and information from it and store it in array list
-        BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(getActivity());
-        db = barterDatabaseHelper.getWritableDatabase();
-        Cursor cursor = barterDatabaseHelper.getInformation(db,1);
-        if(cursor !=null && cursor.moveToFirst())
-        do{
-            Transactions transactions = new Transactions(cursor.getString(0),cursor.getString(1),cursor.getString(2),
-                    cursor.getString(3),cursor.getString(4), cursor.getString(5),cursor.getString(6));
-                        list.add(transactions);
-        }while (cursor !=null && cursor.moveToNext());
+        updateList();
+
         //set the recycler view adapter
         adapter= new RecyclerViewAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         return theView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        list.clear();
+        updateList();
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void updateList(){
+        BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(getActivity());
+        db = barterDatabaseHelper.getWritableDatabase();
+        Cursor cursor = barterDatabaseHelper.getInformation(db,1);
+        if(cursor !=null && cursor.moveToFirst())
+            do{
+                Transactions transactions = new Transactions(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                        cursor.getString(3),cursor.getString(4), cursor.getString(5),cursor.getString(6));
+                list.add(transactions);
+            }while (cursor !=null && cursor.moveToNext());
     }
 }

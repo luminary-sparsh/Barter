@@ -1,6 +1,7 @@
 package com.hfad.barter;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -31,21 +32,7 @@ public class BorrowFragment extends Fragment {
 
 
         //get database and information from it and store it in array list
-        try {
-            BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(getActivity());
-            db = barterDatabaseHelper.getWritableDatabase();
-            Cursor cursor = barterDatabaseHelper.getInformation(db,2);
-            if(cursor !=null && cursor.moveToFirst())
-            do{
-                Transactions transactions = new Transactions(cursor.getString(0),cursor.getString(1),cursor.getString(2),
-                        cursor.getString(3),cursor.getString(4), cursor.getString(5),cursor.getString(6));
-                list.add(transactions);
-            }while (cursor !=null && cursor.moveToNext());
-            cursor.close();
-        }
-        catch (SQLiteException e){
-            Log.d(TAG, "database unavailable");
-        }
+
 
         //set the recycler view adapter
         adapter= new RecyclerViewAdapter(list);
@@ -53,4 +40,31 @@ public class BorrowFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         return theView;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        list.clear();
+        updateList();
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void updateList(){
+        try {
+            BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(getActivity());
+            db = barterDatabaseHelper.getWritableDatabase();
+            Cursor cursor = barterDatabaseHelper.getInformation(db,2);
+            if(cursor !=null && cursor.moveToFirst())
+                do{
+                    Transactions transactions = new Transactions(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                            cursor.getString(3),cursor.getString(4), cursor.getString(5),cursor.getString(6));
+                    list.add(transactions);
+                }while (cursor !=null && cursor.moveToNext());
+            cursor.close();
+        }
+        catch (SQLiteException e){
+            Log.d(TAG, "database unavailable");
+        }
+    }
+
 }
