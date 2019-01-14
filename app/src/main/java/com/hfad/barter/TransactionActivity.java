@@ -101,7 +101,6 @@ public class TransactionActivity extends AppCompatActivity implements AdapterVie
             if(lendBorrow.getSelectedItem().toString().equals("Lend")){  LBvalue = "0";   }
             else LBvalue = "1";
 
-            //// TODO: 16-11-2017 for now favorite=0 change favorite value according to favorite button
             favorite ="0";
 
             //sending the fetched values into he db and printing it in logs

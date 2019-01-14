@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import static android.content.ContentValues.TAG;
 
 public class BorrowFragment extends Fragment {
@@ -24,17 +26,16 @@ public class BorrowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the recycler layout and set linear layout to it.
-        /*RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_borrow,container,false);
-        LinearLayoutManager llm= new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(llm);*/
         View theView = inflater.inflate(R.layout.fragment_borrow, null);
         RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.borrow_recycler);
 
 
         //get database and information from it and store it in array list
+        updateList();
 
 
         //set the recycler view adapter
+        Collections.reverse(list);
         adapter= new RecyclerViewAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -45,6 +46,7 @@ public class BorrowFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         list.clear();
         updateList();
+        Collections.reverse(list);
         adapter.notifyDataSetChanged();
 
     }

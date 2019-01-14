@@ -5,13 +5,16 @@ import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.constraint.ConstraintLayout;
@@ -50,7 +53,8 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
     private ImageButton remind;
     private Boolean isFav;
     private String TAG = "RecyclerViewAdpater";
-    Transactions transactions;
+    private Transactions transactions;
+    private int position;
 
 
     public RecyclerViewAdapter(ArrayList<Transactions> list) {
@@ -95,8 +99,8 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
 
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position){
-        final int pos = position;
+    public void onBindViewHolder(final ViewHolder holder, int pos){
+        final  int position = pos;
         transactions = list.get(position);
         isFav = transactions.getFavorite().trim().equals("1");
         favorite = (ImageButton) holder.cardView.findViewById(R.id.card_favorite_button);
@@ -159,13 +163,14 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                                 BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(context);
                                 SQLiteDatabase db = barterDatabaseHelper.getWritableDatabase();
                                 db.delete("TRANSACTIONS","_id = "+_id,null);
-                                try {
-                                    list.remove(position);
-                                    notifyItemRemoved(position);
-                                    //this line below gives you the animation and also updates the
-                                    //list items after the deleted item
-                                    notifyItemRangeChanged(position, getItemCount());
-                                } catch (Exception e) {      e.printStackTrace();  }
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                BarterDatabaseHelper.printDB(db);
+                                Log.d(TAG, "onClick: "+list.toString());
+                                transactions.toString();
+                                //this line below gives you the animation and also updates the
+                                //list items after the deleted item
+                                notifyItemRangeChanged(position, getItemCount());
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -206,6 +211,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                     list.get(position).setFavorite("1");
                     isFav=true;
                 }
+                //notifyItemChanged(position+1);
             }
         });
 
@@ -303,4 +309,6 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
     public int getItemCount(){
         return list.size();
     }
+
+
 }

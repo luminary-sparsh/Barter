@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import static android.content.ContentValues.TAG;
 
 public class TopFragment extends Fragment {
@@ -29,15 +31,12 @@ public class TopFragment extends Fragment {
         //inflate the recycler layout and set linear layout to it.
         View theView = inflater.inflate(R.layout.fragment_top, null);
         RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.top_recycler);
-        /*RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_lent,container,false);
-        LinearLayoutManager llm= new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(llm);*/
-
 
         //get database and information from it and store it in array list
         updateList();
 
         //set the recycler view adapter
+        Collections.reverse(list);
         adapter= new RecyclerViewAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -53,6 +52,7 @@ public class TopFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         list.clear();
         updateList();
+        Collections.reverse(list);
         adapter.notifyDataSetChanged();
 
     }
