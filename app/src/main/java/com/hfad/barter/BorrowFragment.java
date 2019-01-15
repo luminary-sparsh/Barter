@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,25 +22,33 @@ import static android.content.ContentValues.TAG;
 public class BorrowFragment extends Fragment {
 
     private SQLiteDatabase db;
-    RecyclerView.Adapter adapter;
-    ArrayList<Transactions> list = new ArrayList<>();
+    private RecyclerView.Adapter adapter;
+    private ArrayList<Transactions> list = new ArrayList<>();
+    private TextView tv_noItem;
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the recycler layout and set linear layout to it.
         View theView = inflater.inflate(R.layout.fragment_borrow, null);
-        RecyclerView recyclerView = (RecyclerView) theView.findViewById(R.id.borrow_recycler);
-
+        recyclerView = (RecyclerView) theView.findViewById(R.id.borrow_recycler);
+        tv_noItem = (TextView) theView.findViewById(R.id.tv_no_borrowed_items);
 
         //get database and information from it and store it in array list
         updateList();
 
-
-        //set the recycler view adapter
+        //reversing list for adding new item on top
         Collections.reverse(list);
         adapter= new RecyclerViewAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+
+        if (!list.isEmpty()){
+            setNonEmptyList();
+            recyclerView.setAdapter(adapter);
+        }else {
+            setEmptyList();
+        }
+
         return theView;
     }
 
@@ -46,16 +56,21 @@ public class BorrowFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         list.clear();
         updateList();
-        Collections.reverse(list);
-        adapter.notifyDataSetChanged();
-
+        if (!list.isEmpty()){
+            setNonEmptyList();
+            Collections.reverse(list);
+            adapter.notifyDataSetChanged();
+        }
+        else {
+            setEmptyList();
+        }
     }
 
     private void updateList(){
         try {
             BarterDatabaseHelper barterDatabaseHelper = new BarterDatabaseHelper(getActivity());
             db = barterDatabaseHelper.getWritableDatabase();
-            Cursor cursor = barterDatabaseHelper.getInformation(db,2);
+            Cursor cursor = barterDatabaseHelper.getInformation(db,3);
             if(cursor !=null && cursor.moveToFirst())
                 do{
                     Transactions transactions = new Transactions(cursor.getString(0),cursor.getString(1),cursor.getString(2),
@@ -67,6 +82,16 @@ public class BorrowFragment extends Fragment {
         catch (SQLiteException e){
             Log.d(TAG, "database unavailable");
         }
+    }
+
+    public void setEmptyList(){
+        recyclerView.setVisibility(View.GONE);
+        tv_noItem.setVisibility(View.VISIBLE);
+    }
+
+    public void setNonEmptyList(){
+        recyclerView.setVisibility(View.VISIBLE);
+        tv_noItem.setVisibility(View.GONE);
     }
 
 }

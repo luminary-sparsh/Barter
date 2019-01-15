@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="-2dp"
+        android:background="@color/background_gray"
         android:gravity="center_horizontal"
         android:padding="8dp"
-        android:layout_marginBottom="-2dp"
         android:text="Stuff Borrowed"
         android:textColor="@color/black_text"
-        android:background="@color/background_gray"
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/tv_no_borrowed_items"
         android:layout_width="match_parent"
-        android:scrollbars="vertical"
-        android:id="@+id/borrow_recycler"/>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No data found"
+        android:textColor="@color/black_text"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/borrow_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 </LinearLayout>

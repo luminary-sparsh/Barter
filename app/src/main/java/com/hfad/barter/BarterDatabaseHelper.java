@@ -67,11 +67,11 @@ class BarterDatabaseHelper extends SQLiteOpenHelper {
     public static Cursor getInformation(SQLiteDatabase db,int frag){
         Cursor cursor;
         String[] projection = {"_id","LEND","ITEMNAME","LBNAME","DESCRIPTION","DATETIME","FAVORITE"};
-        if (frag == 1){
+        if (frag == 2){
         cursor = db.query("TRANSACTIONS",projection,"LEND=?",new String[]{"0"},null,null,null);
-        } else if (frag == 2){
+        } else if (frag == 3){
             cursor = db.query("TRANSACTIONS",projection,"LEND=?",new String[]{"1"},null,null,null);
-        }else if (frag == 3){
+        }else if (frag == 1){
             cursor = db.query("TRANSACTIONS", projection, null, null, null,null ,null );
         }
         else {

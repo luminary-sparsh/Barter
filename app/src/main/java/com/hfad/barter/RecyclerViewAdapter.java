@@ -55,6 +55,8 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
     private String TAG = "RecyclerViewAdpater";
     private Transactions transactions;
     private int position;
+    private Fragment fragment;
+    private FragmentManager fragmentManager;
 
 
     public RecyclerViewAdapter(ArrayList<Transactions> list) {
@@ -76,8 +78,8 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
         CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view,parent,false);
         try{
             final Activity activity = (Activity) parent.getContext();
-            FragmentManager fragmentManager=activity.getFragmentManager();
-            Fragment fragment = fragmentManager.findFragmentByTag("visible_fragment");
+            fragmentManager=activity.getFragmentManager();
+            fragment = fragmentManager.findFragmentByTag("visible_fragment");
 
             if (fragment instanceof TopFragment){
                 currentPosition =  0;
@@ -171,6 +173,10 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                                 //this line below gives you the animation and also updates the
                                 //list items after the deleted item
                                 notifyItemRangeChanged(position, getItemCount());
+                                if (position==0){
+                                    //send message back to fragment to do visibility changes
+                                    fragment.onActivityResult(1, 1, new Intent());
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -200,6 +206,10 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
                     fav.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24px ));
                     list.get(position).setFavorite("0");
                     isFav=false;
+                    if(position ==0){
+                        //send message back to fragment to do visibility changes
+                        fragment.onActivityResult(1, 1, new Intent());
+                    }
 
                 }
                 else {
