@@ -61,6 +61,7 @@ public class TopFragment extends Fragment {
         if (!list.isEmpty()){
             setNonEmptyList();
             Collections.reverse(list);
+            recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
         else {
